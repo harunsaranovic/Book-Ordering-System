@@ -2,7 +2,12 @@
   <div class="links">
     <a href="index.php">Home</a>
     <a href="admin/login.php">Admin</a>
-    <a href="login.php">Log in</a>
+    <?php if(!isset($_SESSION['username'])){ ?>
+      <a class="login-link" href="login.php">Log In</a>
+    <?php }else{ ?>
+      <a class="login-link" href="logout.php">Log Out</a>
+      <span class="header-username"> <?php echo $_SESSION['username']; ?></span>
+    <?php } ?>
   </div>
 </header>
 

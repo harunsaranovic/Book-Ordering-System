@@ -17,7 +17,7 @@ include 'head.php';
 <div style="height: 200px; width: 100px;"></div>
 
 <div class="item-input">
-  <form class="" action="add-item.php" method="post">
+  <form class="" action="add-item.php" method="post" enctype="multipart/form-data">
 
     <input type="hidden" name="item_id" value="">
     <label>Name</label>
@@ -34,6 +34,8 @@ include 'head.php';
     <select name="category">
       <option value="1">Food</option><option value="2">Medicine</option><option value="3">Books</option>
     </select>
+    <label>Image</label>
+    <input type="file" name="file" id="file" />
     <input type="submit" name="" value="UPDATE">
 
   </form>

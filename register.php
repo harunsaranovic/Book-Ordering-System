@@ -1,6 +1,8 @@
 <?php
 include 'connect.php';
-
+session_start();
+if(isset($_SESSION['username']))
+  header("Location: index.php");
 ?>
 
 
@@ -42,7 +44,7 @@ include 'connect.php';
       <input type="text" name="phone" value="">
       <label for="email">EMAIL</label>
       <input type="text" name="email" value="">
-      <input type="submit" name="" value="Login">
+      <input type="submit" name="" value="Register">
     </form>
     <div class="register-placeholder">
       <span>Already have an account? </span> <a href="login.php">Log In</a>

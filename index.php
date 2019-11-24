@@ -1,6 +1,8 @@
 <?php
 include 'connect.php';
-
+session_start();
+$sqlquery = "SELECT * FROM items";
+$items = mysqli_query($conn, $sqlquery);
 ?>
 
 
@@ -27,9 +29,28 @@ include 'connect.php';
   <body>
   <?php include 'incl/header.php'; ?>
 
-  <div class="main">
+  <div class="index-items">
+
+    <?php
+    while($item = $items->fetch_array()){
+    ?>
+    <div class="box">
+      <div class="box-img" style="background-image: url(img/<?php echo $item['image']; ?>)"></div>
+      <div class="box-header">
+        <h3><?php echo $item['item_name']; ?></h3>
+      </div>
+      <div class="box-price">
+        <h5><?php echo $item['price']; ?></h5>
+      </div>
+      <div class="box-link">
+        <a href="item?id=<?php echo $item['item_id']; ?>&name=<?php echo $item['item_name']; ?>">Open</a>
+      </div>
+    </div>
+    <?php
+    }?>
 
   </div>
+
 
 
 
