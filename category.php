@@ -1,7 +1,9 @@
 <?php
 include 'connect.php';
 session_start();
-$sqlquery = "SELECT * FROM items";
+$sqlquery = "SELECT * FROM items WHERE category = " . $_GET['id'];
+if($_GET['id']==0)
+  $sqlquery = "SELECT * FROM items";
 $items = mysqli_query($conn, $sqlquery);
 ?>
 
@@ -29,12 +31,13 @@ $items = mysqli_query($conn, $sqlquery);
   <body>
   <?php include 'incl/header.php'; ?>
 
-  <div class="categories">
-    <a href="category.php?id=0" class="active">All</a>
-    <a href="category.php?id=1">Novel</a>
-    <a href="category.php?id=2">Self Help</a>
-    <a href="category.php?id=3">School</a>
-  </div>
+
+    <div class="categories">
+      <a href="category.php?id=0" <?php if($_GET['id']==0) echo 'class="active"'; ?> >All</a>
+      <a href="category.php?id=1" <?php if($_GET['id']==1) echo 'class="active"'; ?> >Novel</a>
+      <a href="category.php?id=2" <?php if($_GET['id']==2) echo 'class="active"'; ?> >Self Help</a>
+      <a href="category.php?id=3" <?php if($_GET['id']==3) echo 'class="active"'; ?> >School</a>
+    </div>
   <div class="index-items">
 
     <?php

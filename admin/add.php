@@ -7,13 +7,9 @@ else if($_SESSION['username'] != 'admin')
   header("Location: ../index.php");
 
 include 'head.php';
+include 'incl/header.php';
 ?>
 
-
-<header>
-  <a href="add.php">Add Item</a>
-  <a href="edit.php">Edit Item</a>
-</header>
 <div style="height: 200px; width: 100px;"></div>
 
 <div class="item-input">
@@ -32,11 +28,11 @@ include 'head.php';
     </select>
     <label>Category</label>
     <select name="category">
-      <option value="1">Food</option><option value="2">Medicine</option><option value="3">Books</option>
+      <option value="1">Novel</option><option value="2">Self Help</option><option value="3">School</option>
     </select>
     <label>Image</label>
     <input type="file" name="file" id="file" />
-    <input type="submit" name="" value="UPDATE">
+    <input type="submit" name="" value="ADD">
 
   </form>
 </div>

@@ -1,8 +1,9 @@
 <?php
 include 'connect.php';
 session_start();
-$sqlquery = "SELECT * FROM items";
+$sqlquery = "SELECT * FROM orders INNER JOIN items ON orders.items_id = items.item_id WHERE orders.customer_id ='" . $_SESSION['id'] . "'";
 $items = mysqli_query($conn, $sqlquery);
+$items2 = mysqli_query($conn, $sqlquery);
 ?>
 
 
@@ -29,33 +30,38 @@ $items = mysqli_query($conn, $sqlquery);
   <body>
   <?php include 'incl/header.php'; ?>
 
-  <div class="categories">
-    <a href="category.php?id=0" class="active">All</a>
-    <a href="category.php?id=1">Novel</a>
-    <a href="category.php?id=2">Self Help</a>
-    <a href="category.php?id=3">School</a>
-  </div>
-  <div class="index-items">
+  <div class="cart-holder">
+    <div class="cart-items date-items">
 
-    <?php
-    while($item = $items->fetch_array()){
-    ?>
-    <div class="box">
-      <div class="box-img" style="background-image: url(img/<?php echo $item['image']; ?>)"></div>
-      <div class="box-header">
-        <h3><?php echo $item['item_name']; ?></h3>
+      <?php
+      while($item = $items->fetch_array()){
+      ?>
+      <div class="box">
+        <div class="box-img" style="background-image: url(img/<?php echo $item['image']; ?>)"></div>
+        <div class="box-header">
+          <h3><?php echo $item['item_name']; ?></h3>
+        </div>
+
+        <div class="dates">
+          <span>Date Shipped:</span>
+          <h5><?php echo $item['date_shipped']; ?></h5>
+          <?php if(isset($item['date_delivered'])){ ?>
+            <span>Date Shipped:</span>
+            <h5><?php echo $item['date_delivered']; ?></h5>
+          <?php } ?>
+        </div>
+
+        <div class="box-price">
+          <h5><?php echo $item['price']; ?></h5>
+        </div>
       </div>
-      <div class="box-price">
-        <h5><?php echo $item['price']; ?></h5>
-      </div>
-      <div class="box-link">
-        <a href="item.php?id=<?php echo $item['item_id']; ?>&name=<?php echo $item['item_name']; ?>">Open</a>
-      </div>
+      <?php
+      }?>
+
     </div>
-    <?php
-    }?>
-
   </div>
+
+
 
 
 

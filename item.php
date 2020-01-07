@@ -1,7 +1,8 @@
 <?php
 include 'connect.php';
 session_start();
-$sqlquery = "SELECT * FROM items";
+$id = $_GET['id'];
+$sqlquery = "SELECT * FROM items WHERE item_id=" . $id . ";";
 $items = mysqli_query($conn, $sqlquery);
 ?>
 
@@ -28,28 +29,32 @@ $items = mysqli_query($conn, $sqlquery);
   </head>
   <body>
   <?php include 'incl/header.php'; ?>
+  <div style="width: 100%; height: 100px;"></div>
 
-  <div class="categories">
-    <a href="category.php?id=0" class="active">All</a>
-    <a href="category.php?id=1">Novel</a>
-    <a href="category.php?id=2">Self Help</a>
-    <a href="category.php?id=3">School</a>
-  </div>
   <div class="index-items">
 
     <?php
     while($item = $items->fetch_array()){
     ?>
-    <div class="box">
-      <div class="box-img" style="background-image: url(img/<?php echo $item['image']; ?>)"></div>
-      <div class="box-header">
-        <h3><?php echo $item['item_name']; ?></h3>
-      </div>
-      <div class="box-price">
-        <h5><?php echo $item['price']; ?></h5>
-      </div>
-      <div class="box-link">
-        <a href="item.php?id=<?php echo $item['item_id']; ?>&name=<?php echo $item['item_name']; ?>">Open</a>
+    <div class="item-box">
+      <div class="item-box-img" style="background-image: url(img/<?php echo $item['image']; ?>)"></div>
+      <div class="item-box-data">
+        <div class="item-box-header">
+          <h3><?php echo $item['item_name']; ?></h3>
+          <h5><?php echo $item['description']; ?></h5>
+        </div>
+        <br>
+        <br>
+        <div class="item-box-price">
+          <h5><?php echo $item['price']; ?></h5>
+        </div>
+        <div class="item-box-link">
+          <?php if(!isset($_SESSION['username'])){ ?>
+            <a href="login.php">ADD TO CART</a>
+          <?php }else{ ?>
+            <a href="add-to-cart.php?id=<?php echo $item['item_id']; ?>">ADD TO CART</a>
+          <?php } ?>
+        </div>
       </div>
     </div>
     <?php

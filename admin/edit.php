@@ -8,16 +8,13 @@ else if($_SESSION['username'] != 'admin')
 
 include 'connect.php';
 include 'head.php';
+include 'incl/header.php';
 
  $sqlquery = "SELECT * FROM items WHERE item_id=" . $_GET['id'];
  $items = mysqli_query($conn, $sqlquery);
 ?>
 
 
-<header>
-  <a href="add.php">Add Item</a>
-  <a href="edit.php">Edit Item</a>
-</header>
 <div style="height: 200px; width: 100px;"></div>
 
 <div class="item-input">
@@ -42,11 +39,11 @@ include 'head.php';
     echo '<label>Category</label>';
     echo '<select name="category">';
     if($item['category']==1)
-      echo '<option value="1">Food</option><option value="2">Medicine</option><option value="3">Books</option>';
+      echo '<option value="1">Novel</option><option value="2">Self Help</option><option value="3">School</option>';
     else if($item['category']==2)
-      echo '<option value="2">Medicine</option><option value="1">Food</option><option value="3">Books</option>';
+      echo '<option value="2">Self Help</option><option value="1">Novel</option><option value="3">School</option>';
     else if($item['category']==3)
-      echo '<option value="3">Books</option><option value="2">Medicine</option><option value="1">Food</option>';
+      echo '<option value="3">School</option><option value="2">Self Help</option><option value="1">Novel</option>';
     echo '</select>';
     echo '<input type="submit" name="" value="UPDATE">';
   }?>
